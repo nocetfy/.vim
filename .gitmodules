@@ -24,9 +24,25 @@
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "pack/plugins/start/vim-visual-star-search"]
 	path = pack/plugins/start/vim-visual-star-search
+    url =  https://github.com/bronson/vim-visual-star-search.git
 [submodule "pack/plugins/start/YouCompleteMe"]
 	path = pack/plugins/start/YouCompleteMe
     url = https://github.com/ycm-core/YouCompleteMe.git
 [submodule "pack/plugins/start/vim-abolish"]
 	path = pack/plugins/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "pack/plugins/start/LeaderF"]
+	path = pack/plugins/start/LeaderF
+	url = https://github.com/Yggdroot/LeaderF.git
+[submodule "pack/plugins/start/neoformat"]
+	path = pack/plugins/start/neoformat
+	url = https://github.com/sbdchd/neoformat.git
+[submodule "pack/plugins/start/vim-visual-multi"]
+	path = pack/plugins/start/vim-visual-multi
+	url = https://github.com/mg979/vim-visual-multi.git
+[submodule "pack/plugins/start/auto-pairs"]
+	path = pack/plugins/start/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs.git
+[submodule "pack/plugins/start/nerdcommenter"]
+	path = pack/plugins/start/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
