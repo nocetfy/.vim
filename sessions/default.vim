@@ -7,10 +7,8 @@ inoremap <C-Tab> 
 inoremap <silent> <Plug>NERDCommenterInsert  <BS>:call NERDComment('i', "insert")
 inoremap <silent> <Plug>CocRefresh =coc#_complete()
 inoremap <silent> <SNR>29_AutoPairsReturn =AutoPairsReturn()
-snoremap <silent>  c
 nmap <nowait>  <Plug>(VM-Find-Under)
 xmap <nowait>  <Plug>(VM-Find-Subword-Under)
-snoremap  "_c
 map  :TlistToggle
 nnoremap ^[ ^[
 nnoremap  :noh
@@ -27,7 +25,7 @@ xmap S <Plug>VSurround
 omap <silent> [% <Plug>(MatchitOperationMultiBackward)
 xmap <silent> [% <Plug>(MatchitVisualMultiBackward)
 nmap <silent> [% <Plug>(MatchitNormalMultiBackward)
-xnoremap \* :call VisualStarSearchSet('/'):execute 'noautocmd vimgrep /' . @/ . '/ **'
+vnoremap \* :call VisualStarSearchSet('/'):execute 'noautocmd vimgrep /' . @/ . '/ **'
 nnoremap \* :execute 'noautocmd vimgrep /\V' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '/ **'
 xmap <nowait> \\c <Plug>(VM-Visual-Cursors)
 nmap <nowait> \\gs <Plug>(VM-Get-Operator)
@@ -74,7 +72,7 @@ nmap \WQ :wa:q
 nmap \w :w
 nmap \q :q
 nmap \p "+p
-xnoremap \y "+y
+vnoremap \y "+y
 omap <silent> ]% <Plug>(MatchitOperationMultiForward)
 xmap <silent> ]% <Plug>(MatchitVisualMultiForward)
 nmap <silent> ]% <Plug>(MatchitNormalMultiForward)
@@ -84,7 +82,7 @@ nmap cS <Plug>CSurround
 nmap cs <Plug>Csurround
 nmap ds <Plug>Dsurround
 xmap gS <Plug>VgSurround
-xmap gx <Plug>NetrwBrowseXVis
+vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
 omap <silent> g% <Plug>(MatchitOperationBackward)
 xmap <silent> g% <Plug>(MatchitVisualBackward)
@@ -95,9 +93,7 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-snoremap <silent> <Del> c
-snoremap <silent> <BS> c
-nnoremap <SNR>104_: :=v:count ? v:count : ''
+nnoremap <SNR>107_: :=v:count ? v:count : ''
 nmap <nowait> <C-Up> <Plug>(VM-Add-Cursor-Up)
 nmap <nowait> <S-Right> <Plug>(VM-Select-l)
 nmap <nowait> <S-Left> <Plug>(VM-Select-h)
@@ -248,11 +244,7 @@ imap S <Plug>ISurround
 imap s <Plug>Isurround
 imap 	 <Plug>SuperTabForward
 imap  <Plug>Isurround
-inoremap <expr>  omni#cpp#maycomplete#Complete()
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-inoremap <expr> . omni#cpp#maycomplete#Dot()
-inoremap <expr> : omni#cpp#maycomplete#Scope()
-inoremap <expr> > omni#cpp#maycomplete#Arrow()
 cmap w!! :w !sudo tee % >/dev/null
 let &cpo=s:cpo_save
 unlet s:cpo_save
@@ -268,9 +260,8 @@ set incsearch
 set langmenu=en_US
 set laststatus=2
 set mouse=a
-set omnifunc=omni#cpp#complete#Main
 set ruler
-set runtimepath=~/.vim,~/.vim/pack/plugins/start/vim-visual-star-search,~/.vim/pack/plugins/start/vim-visual-multi,~/.vim/pack/plugins/start/vim-indent-guides,~/.vim/pack/plugins/start/vim-fugitive,~/.vim/pack/plugins/start/vim-airline,~/.vim/pack/plugins/start/vim-abolish,~/.vim/pack/plugins/start/tagbar,~/.vim/pack/plugins/start/surround,~/.vim/pack/plugins/start/supertab,~/.vim/pack/plugins/start/omnicppcomplete,~/.vim/pack/plugins/start/nerdtree,~/.vim/pack/plugins/start/nerdcommenter,~/.vim/pack/plugins/start/neoformat,~/.vim/pack/plugins/start/fcitx.vim,~/.vim/pack/plugins/start/coc.nvim,~/.vim/pack/plugins/start/auto-pairs,~/.vim/pack/plugins/start/LeaderF,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vim81/pack/dist/opt/matchit,~/.vim/pack/plugins/start/omnicppcomplete/after,/usr/share/vim/vimfiles/after,~/.vim/after
+set runtimepath=~/.vim,~/.vim/pack/plugins/start/vim-visual-star-search,~/.vim/pack/plugins/start/vim-visual-multi,~/.vim/pack/plugins/start/vim-indent-guides,~/.vim/pack/plugins/start/vim-fugitive,~/.vim/pack/plugins/start/vim-airline,~/.vim/pack/plugins/start/vim-abolish,~/.vim/pack/plugins/start/tagbar,~/.vim/pack/plugins/start/surround,~/.vim/pack/plugins/start/supertab,~/.vim/pack/plugins/start/nerdtree,~/.vim/pack/plugins/start/nerdcommenter,~/.vim/pack/plugins/start/neoformat,~/.vim/pack/plugins/start/fcitx.vim,~/.vim/pack/plugins/start/delimitMate,~/.vim/pack/plugins/start/coc.nvim,~/.vim/pack/plugins/start/auto-pairs,~/.vim/pack/plugins/start/LeaderF,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vim81/pack/dist/opt/matchit,/usr/share/vim/vimfiles/after,~/.vim/after
 set shiftwidth=4
 set showtabline=2
 set softtabstop=4
@@ -283,15 +274,15 @@ let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/
+cd ~/.vim/pack/plugins/start/coc.nvim
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd git/C/six/cmpflt.c
-edit git/C/six/cmpflt.c
+$argadd Readme.md
+edit Readme.md
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -322,12 +313,8 @@ inoremap <buffer> <silent> " =AutoPairsInsert('"')
 inoremap <buffer> <silent> ' =AutoPairsInsert('''')
 inoremap <buffer> <silent> ( =AutoPairsInsert('(')
 inoremap <buffer> <silent> ) =AutoPairsInsert(')')
-nnoremap <buffer> <silent> î :call AutoPairsJump()
-xnoremap <buffer> <silent> î :call AutoPairsJump()
-onoremap <buffer> <silent> î :call AutoPairsJump()
-nnoremap <buffer> <silent> ð :call AutoPairsToggle()
-xnoremap <buffer> <silent> ð :call AutoPairsToggle()
-onoremap <buffer> <silent> ð :call AutoPairsToggle()
+noremap <buffer> <silent> î :call AutoPairsJump()
+noremap <buffer> <silent> ð :call AutoPairsToggle()
 inoremap <buffer> <silent> [ =AutoPairsInsert('[')
 inoremap <buffer> <silent> ] =AutoPairsInsert(']')
 inoremap <buffer> <silent> ` =AutoPairsInsert('`')
@@ -351,8 +338,8 @@ setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=/*%s*/
+setlocal comments=fb:*,fb:-,fb:+,n:>
+setlocal commentstring=>\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -368,8 +355,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'c'
-setlocal filetype=c
+if &filetype != 'markdown'
+setlocal filetype=markdown
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -385,8 +372,8 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatoptions=tcqln
+setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\|^[-*+]\\s\\+\\|^\\[^\\ze[^\\]]\\+\\]:
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
@@ -404,14 +391,14 @@ setlocal lispwords=
 setlocal nolist
 setlocal makeencoding=
 setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
+setlocal matchpairs=(:),{:},[:],<:>
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=omni#cpp#complete#Main
+setlocal omnifunc=htmlcomplete#CompleteTags
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -436,8 +423,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'c'
-setlocal syntax=c
+if &syntax != 'markdown'
+setlocal syntax=markdown
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -457,14 +444,14 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 3 - ((2 * winheight(0) + 10) / 21)
+let s:l = 173 - ((0 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-3
+173
 normal! 0
 tabnext 1
-badd +0 git/C/six/cmpflt.c
+badd +0 Readme.md
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
