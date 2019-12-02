@@ -25,9 +25,6 @@
 [submodule "pack/plugins/start/vim-visual-star-search"]
 	path = pack/plugins/start/vim-visual-star-search
     url =  https://github.com/bronson/vim-visual-star-search.git
-[submodule "pack/plugins/start/YouCompleteMe"]
-	path = pack/plugins/start/YouCompleteMe
-    url = https://github.com/ycm-core/YouCompleteMe.git
 [submodule "pack/plugins/start/vim-abolish"]
 	path = pack/plugins/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
