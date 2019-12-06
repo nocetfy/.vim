@@ -2,16 +2,29 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-imap <S-Tab> <Plug>SuperTabBackward
-inoremap <C-Tab> 	
+imap <C-G>S <Plug>ISurround
+imap <C-G>s <Plug>Isurround
+imap <C-S> <Plug>Isurround
 inoremap <silent> <Plug>NERDCommenterInsert  <BS>:call NERDComment('i', "insert")
 inoremap <silent> <Plug>CocRefresh =coc#_complete()
-inoremap <silent> <SNR>29_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>25_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <expr> <C-Space> coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\"
+xmap <silent>  <Plug>(coc-range-select)
+nmap <silent>  <Plug>(coc-range-select)
 nmap <nowait>  <Plug>(VM-Find-Under)
 xmap <nowait>  <Plug>(VM-Find-Subword-Under)
 map  :TlistToggle
 nnoremap ^[ ^[
 nnoremap  :noh
+nnoremap <silent>  p :CocListResume
+nnoremap <silent>  k :CocPrev
+nnoremap <silent>  j :CocNext
+nnoremap <silent>  s :CocList -I symbols
+nnoremap <silent>  o :CocList outline
+nnoremap <silent>  c :CocList commands
+nnoremap <silent>  e :CocList extensions
+nnoremap <silent>  a :CocList diagnostics
 xnoremap # :call VisualStarSearchSet('?')?=@/
 omap <silent> % <Plug>(MatchitOperationForward)
 xmap <silent> % <Plug>(MatchitVisualForward)
@@ -22,6 +35,7 @@ xnoremap * :call VisualStarSearchSet('/')/=@/
 nmap LE $
 nmap LB 0
 xmap S <Plug>VSurround
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
 omap <silent> [% <Plug>(MatchitOperationMultiBackward)
 xmap <silent> [% <Plug>(MatchitVisualMultiBackward)
 nmap <silent> [% <Plug>(MatchitNormalMultiBackward)
@@ -60,7 +74,13 @@ nmap \c  <Plug>NERDCommenterToggle
 xmap \cc <Plug>NERDCommenterComment
 nmap \cc <Plug>NERDCommenterComment
 nnoremap <silent> \b :LeaderfBuffer
-nnoremap <silent> \f :LeaderfFile
+nmap \qf <Plug>(coc-fix-current)
+nmap \ac <Plug>(coc-codeaction)
+nmap \a <Plug>(coc-codeaction-selected)
+xmap \a <Plug>(coc-codeaction-selected)
+nmap \f <Plug>(coc-format-selected)
+xmap \f <Plug>(coc-format-selected)
+nmap \rn <Plug>(coc-rename)
 nmap <silent> \i <Plug>IndentGuidesToggle
 nmap \M %
 nnoremap \jw j
@@ -73,9 +93,12 @@ nmap \w :w
 nmap \q :q
 nmap \p "+p
 vnoremap \y "+y
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 omap <silent> ]% <Plug>(MatchitOperationMultiForward)
 xmap <silent> ]% <Plug>(MatchitVisualMultiForward)
 nmap <silent> ]% <Plug>(MatchitNormalMultiForward)
+omap af <Plug>(coc-funcobj-a)
+xmap af <Plug>(coc-funcobj-a)
 xmap a% <Plug>(MatchitVisualTextObject)
 nmap cr <Plug>(abolish-coerce-word)
 nmap cS <Plug>CSurround
@@ -84,16 +107,24 @@ nmap ds <Plug>Dsurround
 xmap gS <Plug>VgSurround
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gd <Plug>(coc-definition)
 omap <silent> g% <Plug>(MatchitOperationBackward)
 xmap <silent> g% <Plug>(MatchitVisualBackward)
 nmap <silent> g% <Plug>(MatchitNormalBackward)
+omap if <Plug>(coc-funcobj-i)
+xmap if <Plug>(coc-funcobj-i)
 nnoremap nw 
 nmap ySS <Plug>YSsurround
 nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <SNR>107_: :=v:count ? v:count : ''
+nnoremap <SNR>96_: :=v:count ? v:count : ''
+nmap <nowait> <C-N> <Plug>(VM-Find-Under)
+xmap <nowait> <C-N> <Plug>(VM-Find-Subword-Under)
 nmap <nowait> <C-Up> <Plug>(VM-Add-Cursor-Up)
 nmap <nowait> <S-Right> <Plug>(VM-Select-l)
 nmap <nowait> <S-Left> <Plug>(VM-Select-h)
@@ -219,30 +250,33 @@ noremap <silent> <Plug>LeaderfFileLeft :call leaderf#File#startExpl('left')
 noremap <silent> <Plug>LeaderfFileBottom :call leaderf#File#startExpl('bottom')
 noremap <silent> <Plug>LeaderfFileTop :call leaderf#File#startExpl('top')
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
+nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
+xmap <silent> <C-D> <Plug>(coc-range-select)
+nmap <silent> <C-D> <Plug>(coc-range-select)
 nnoremap <S-Tab> :bnext
 nnoremap <C-Tab> :bn
 nnoremap <C-S-Tab> :bprevious
-vmap <silent> <Plug>(MatchitVisualTextObject) <Plug>(MatchitVisualMultiBackward)o<Plug>(MatchitVisualMultiForward)
+xmap <silent> <Plug>(MatchitVisualTextObject) <Plug>(MatchitVisualMultiBackward)o<Plug>(MatchitVisualMultiForward)
 onoremap <silent> <Plug>(MatchitOperationMultiForward) :call matchit#MultiMatch("W",  "o")
 onoremap <silent> <Plug>(MatchitOperationMultiBackward) :call matchit#MultiMatch("bW", "o")
-vnoremap <silent> <Plug>(MatchitVisualMultiForward) :call matchit#MultiMatch("W",  "n")m'gv``
-vnoremap <silent> <Plug>(MatchitVisualMultiBackward) :call matchit#MultiMatch("bW", "n")m'gv``
+xnoremap <silent> <Plug>(MatchitVisualMultiForward) :call matchit#MultiMatch("W",  "n")m'gv``
+xnoremap <silent> <Plug>(MatchitVisualMultiBackward) :call matchit#MultiMatch("bW", "n")m'gv``
 nnoremap <silent> <Plug>(MatchitNormalMultiForward) :call matchit#MultiMatch("W",  "n")
 nnoremap <silent> <Plug>(MatchitNormalMultiBackward) :call matchit#MultiMatch("bW", "n")
 onoremap <silent> <Plug>(MatchitOperationBackward) :call matchit#Match_wrapper('',0,'o')
 onoremap <silent> <Plug>(MatchitOperationForward) :call matchit#Match_wrapper('',1,'o')
-vnoremap <silent> <Plug>(MatchitVisualBackward) :call matchit#Match_wrapper('',0,'v')m'gv``
-vnoremap <silent> <Plug>(MatchitVisualForward) :call matchit#Match_wrapper('',1,'v')m'gv``
+xnoremap <silent> <Plug>(MatchitVisualBackward) :call matchit#Match_wrapper('',0,'v')m'gv``
+xnoremap <silent> <Plug>(MatchitVisualForward) :call matchit#Match_wrapper('',1,'v')m'gv``
 nnoremap <silent> <Plug>(MatchitNormalBackward) :call matchit#Match_wrapper('',0,'n')
 nnoremap <silent> <Plug>(MatchitNormalForward) :call matchit#Match_wrapper('',1,'n')
 map <F3> : call PyTitle()  
 map <F2> : call AddTitle() 
+map <C-T> :TlistToggle
 nmap <F8> :TagbarToggle
 map <F10> :NERDTreeToggle
 imap S <Plug>ISurround
 imap s <Plug>Isurround
-imap 	 <Plug>SuperTabForward
+inoremap <expr>  pumvisible() ? "\" : "\u\"
 imap  <Plug>Isurround
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 cmap w!! :w !sudo tee % >/dev/null
@@ -250,10 +284,12 @@ let &cpo=s:cpo_save
 unlet s:cpo_save
 set backspace=indent,eol,start
 set cindent
+set cmdheight=2
 set completeopt=longest,menu
 set expandtab
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set helplang=cn
+set hidden
 set hlsearch
 set ignorecase
 set incsearch
@@ -261,28 +297,32 @@ set langmenu=en_US
 set laststatus=2
 set mouse=a
 set ruler
-set runtimepath=~/.vim,~/.vim/pack/plugins/start/vim-visual-star-search,~/.vim/pack/plugins/start/vim-visual-multi,~/.vim/pack/plugins/start/vim-indent-guides,~/.vim/pack/plugins/start/vim-fugitive,~/.vim/pack/plugins/start/vim-airline,~/.vim/pack/plugins/start/vim-abolish,~/.vim/pack/plugins/start/tagbar,~/.vim/pack/plugins/start/surround,~/.vim/pack/plugins/start/supertab,~/.vim/pack/plugins/start/nerdtree,~/.vim/pack/plugins/start/nerdcommenter,~/.vim/pack/plugins/start/neoformat,~/.vim/pack/plugins/start/fcitx.vim,~/.vim/pack/plugins/start/delimitMate,~/.vim/pack/plugins/start/coc.nvim,~/.vim/pack/plugins/start/auto-pairs,~/.vim/pack/plugins/start/LeaderF,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vim81/pack/dist/opt/matchit,/usr/share/vim/vimfiles/after,~/.vim/after
+set runtimepath=~/.vim,~/.vim/pack/plugins/start/vim-visual-star-search,~/.vim/pack/plugins/start/vim-visual-multi,~/.vim/pack/plugins/start/vim-indent-guides,~/.vim/pack/plugins/start/vim-fugitive,~/.vim/pack/plugins/start/vim-airline,~/.vim/pack/plugins/start/vim-abolish,~/.vim/pack/plugins/start/tagbar,~/.vim/pack/plugins/start/surround,~/.vim/pack/plugins/start/nerdtree,~/.vim/pack/plugins/start/nerdcommenter,~/.vim/pack/plugins/start/neoformat,~/.vim/pack/plugins/start/fcitx.vim,~/.vim/pack/plugins/start/delimitMate,~/.vim/pack/plugins/start/coc.nvim,~/.vim/pack/plugins/start/auto-pairs,~/.vim/pack/plugins/start/LeaderF,/usr/local/share/vim/vimfiles,/usr/local/share/vim/vim81,/usr/local/share/vim/vim81/pack/dist/opt/matchit,/usr/local/share/vim/vimfiles/after,~/.vim/after
 set shiftwidth=4
+set shortmess=filnxtToOSc
 set showtabline=2
 set softtabstop=4
+set statusline=%{coc#status()}%{get(b:,'coc_current_function','')}
 set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
 set tags=./tags,./TAGS,tags,TAGS,~/.vim/tags/cpp_src/tags
 set ttimeoutlen=0
+set updatetime=300
 set wildmenu
+set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/.vim/pack/plugins/start/coc.nvim
+cd ~/git
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd Readme.md
-edit Readme.md
+$argadd test.sh
+edit test.sh
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -294,7 +334,20 @@ set winwidth=1
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
+inoremap <buffer> <silent> <expr> <M-p> AutoPairsToggle()
+inoremap <buffer> <silent> <M-b> =AutoPairsBackInsert()
+inoremap <buffer> <silent> <M-e> =AutoPairsFastWrap()
+inoremap <buffer> <silent> <C-H> =AutoPairsDelete()
 inoremap <buffer> <silent> <BS> =AutoPairsDelete()
+inoremap <buffer> <silent> <M-'> =AutoPairsMoveCharacter('''')
+inoremap <buffer> <silent> <M-"> =AutoPairsMoveCharacter('"')
+inoremap <buffer> <silent> <M-}> =AutoPairsMoveCharacter('}')
+inoremap <buffer> <silent> <M-{> =AutoPairsMoveCharacter('{')
+inoremap <buffer> <silent> <M-]> =AutoPairsMoveCharacter(']')
+inoremap <buffer> <silent> <M-[> =AutoPairsMoveCharacter('[')
+inoremap <buffer> <silent> <M-)> =AutoPairsMoveCharacter(')')
+inoremap <buffer> <silent> <M-(> =AutoPairsMoveCharacter('(')
 inoremap <buffer> <silent> § =AutoPairsMoveCharacter('''')
 inoremap <buffer> <silent> ¢ =AutoPairsMoveCharacter('"')
 inoremap <buffer> <silent> © =AutoPairsMoveCharacter(')')
@@ -307,6 +360,8 @@ inoremap <buffer> <silent> ý =AutoPairsMoveCharacter('}')
 inoremap <buffer> <silent> û =AutoPairsMoveCharacter('{')
 inoremap <buffer> <silent> Ý =AutoPairsMoveCharacter(']')
 inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
+noremap <buffer> <silent> <M-n> :call AutoPairsJump()
+noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
 inoremap <buffer> <silent>  =AutoPairsDelete()
 inoremap <buffer> <silent>   =AutoPairsSpace()
 inoremap <buffer> <silent> " =AutoPairsInsert('"')
@@ -338,8 +393,8 @@ setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=fb:*,fb:-,fb:+,n:>
-setlocal commentstring=>\ %s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=#%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -349,14 +404,15 @@ setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal nocursorline
+setlocal cursorlineopt=both
 setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'markdown'
-setlocal filetype=markdown
+if &filetype != 'sh'
+setlocal filetype=sh
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -372,16 +428,16 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcqln
-setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\|^[-*+]\\s\\+\\|^\\[^\\ze[^\\]]\\+\\]:
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal indentexpr=GetShIndent()
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -391,14 +447,14 @@ setlocal lispwords=
 setlocal nolist
 setlocal makeencoding=
 setlocal makeprg=
-setlocal matchpairs=(:),{:},[:],<:>
+setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -411,8 +467,10 @@ setlocal noscrollbind
 setlocal scrolloff=-1
 setlocal shiftwidth=4
 setlocal noshortname
+setlocal showbreak=
 setlocal sidescrolloff=-1
-setlocal signcolumn=auto
+set signcolumn=yes
+setlocal signcolumn=yes
 setlocal nosmartindent
 setlocal softtabstop=4
 setlocal nospell
@@ -423,8 +481,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'markdown'
-setlocal syntax=markdown
+if &syntax != 'sh'
+setlocal syntax=sh
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -444,19 +502,19 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 173 - ((0 * winheight(0) + 10) / 21)
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-173
+1
 normal! 0
 tabnext 1
-badd +0 Readme.md
+badd +0 test.sh
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToOS
+set winheight=1 winwidth=20 shortmess=filnxtToOSc
 set winminheight=1 winminwidth=1
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
