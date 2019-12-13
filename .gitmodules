@@ -4,9 +4,6 @@
 [submodule "pack/plugins/start/vim-airline"]
 	path = pack/plugins/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
-[submodule "pack/plugins/start/tagbar"]
-	path = pack/plugins/start/tagbar
-	url = https://github.com/majutsushi/tagbar.git
 [submodule "pack/plugins/start/fcitx.vim"]
 	path = pack/plugins/start/fcitx.vim
 	url = https://github.com/lilydjwg/fcitx.vim.git
