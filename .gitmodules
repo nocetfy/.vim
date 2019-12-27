@@ -31,9 +31,6 @@
 [submodule "pack/plugins/start/vim-visual-multi"]
 	path = pack/plugins/start/vim-visual-multi
 	url = https://github.com/mg979/vim-visual-multi.git
-[submodule "pack/plugins/start/auto-pairs"]
-	path = pack/plugins/start/auto-pairs
-	url = https://github.com/jiangmiao/auto-pairs.git
 [submodule "pack/plugins/start/nerdcommenter"]
 	path = pack/plugins/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
