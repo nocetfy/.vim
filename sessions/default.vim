@@ -296,7 +296,7 @@ set cindent
 set cmdheight=2
 set expandtab
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set formatoptions=ql
+set formatoptions=tln
 set helplang=cn
 set hidden
 set hlsearch
@@ -305,6 +305,7 @@ set incsearch
 set langmenu=en_US
 set laststatus=2
 set mouse=a
+set pyxversion=3
 set ruler
 set runtimepath=~/.vim,~/.vim/pack/plugins/start/vim-visual-multi,~/.vim/pack/plugins/start/vim-fugitive,~/.vim/pack/plugins/start/vim-airline,~/.vim/pack/plugins/start/vim-abolish,~/.vim/pack/plugins/start/surround,~/.vim/pack/plugins/start/nerdtree,~/.vim/pack/plugins/start/nerdcommenter,~/.vim/pack/plugins/start/indentLine,~/.vim/pack/plugins/start/fcitx.vim,~/.vim/pack/plugins/start/delimitMate,~/.vim/pack/plugins/start/coc.nvim,~/.vim/pack/plugins/start/LeaderF,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vim82/pack/dist/opt/matchit,~/.vim/pack/plugins/start/indentLine/after,/usr/share/vim/vimfiles/after,~/.vim/after
 set shell=/usr/bin/fish
@@ -313,7 +314,6 @@ set shortmess=filnxtToOSc
 set showtabline=2
 set softtabstop=4
 set statusline=%{coc#status()}%{get(b:,'coc_current_function','')}
-set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.class
 set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
 set ttimeoutlen=0
@@ -324,15 +324,15 @@ let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/git/algorithm4/src/com/nocetfy/chap2
+cd ~/
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd Quick.java
-edit Quick.java
+$argadd .git/COMMIT_EDITMSG
+edit .git/COMMIT_EDITMSG
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -348,8 +348,11 @@ imap <buffer> <silent> <C-G>g <Plug>delimitMateJumpMany
 imap <buffer> <S-BS> <Plug>delimitMateS-BS
 imap <buffer> <C-H> <Plug>delimitMateBS
 imap <buffer> <BS> <Plug>delimitMateBS
+cmap <buffer> <silent> <C-R><C-F> <Plug><cfile>
+cnoremap <buffer> <expr> <Plug><cfile> fugitive#MessageCfile()
 imap <buffer> <silent> g <Plug>delimitMateJumpMany
 imap <buffer>  <Plug>delimitMateBS
+cmap <buffer> <silent>  <Plug><cfile>
 imap <buffer> " <Plug>delimitMate"
 imap <buffer> ' <Plug>delimitMate'
 imap <buffer> ( <Plug>delimitMate(
@@ -374,11 +377,11 @@ setlocal buflisted
 setlocal buftype=
 setlocal cindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal cinoptions=j1
+setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=//%s
+setlocal comments=:#
+setlocal commentstring=#\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=inc
 setlocal conceallevel=2
@@ -395,8 +398,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'java'
-setlocal filetype=java
+if &filetype != 'gitcommit'
+setlocal filetype=gitcommit
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -410,21 +413,22 @@ set foldmethod=syntax
 setlocal foldmethod=syntax
 setlocal foldminlines=1
 setlocal foldnestmax=20
-setlocal foldtext=foldtext()
+set foldtext=fugitive#Foldtext()
+setlocal foldtext=fugitive#Foldtext()
 setlocal formatexpr=
-setlocal formatoptions=ql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatoptions=tln
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*\\|^\\s*[-*+]\\s\\+
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
-setlocal includeexpr=substitute(v:fname,'\\.','/','g')
-setlocal indentexpr=GetJavaIndent()
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,0=extends,0=implements
+setlocal includeexpr=substitute(v:fname,'^[^/]\\+/','','')
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
+setlocal keywordprg=git\ --git-dir='/home/nocetfy/.git'\ show
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -432,14 +436,14 @@ setlocal nolist
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal modeline
+setlocal nomodeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
-setlocal path=
+setlocal path=~/.git,~/,
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -462,20 +466,20 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=.java
+setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'java'
-setlocal syntax=java
+if &syntax != 'gitcommit'
+setlocal syntax=gitcommit
 endif
-setlocal tabstop=4
+setlocal tabstop=8
 setlocal tagcase=
 setlocal tagfunc=
 setlocal tags=
 setlocal termwinkey=
 setlocal termwinscroll=10000
 setlocal termwinsize=
-setlocal textwidth=0
+setlocal textwidth=72
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
@@ -486,14 +490,14 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 21) / 42)
+let s:l = 1 - ((0 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
 tabnext 1
-badd +0 Quick.java
+badd +0 .git/COMMIT_EDITMSG
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
