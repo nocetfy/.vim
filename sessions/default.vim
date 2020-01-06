@@ -6,8 +6,6 @@ imap <C-G>S <Plug>ISurround
 imap <C-G>s <Plug>Isurround
 imap <C-S> <Plug>Isurround
 inoremap <silent> <Plug>NERDCommenterInsert  <BS>:call NERDComment('i', "insert")
-inoremap <silent> <expr> <Plug>delimitMateS-BS delimitMate#WithinEmptyPair() ? "\<Del>" : "\<S-BS>"
-inoremap <silent> <Plug>delimitMateBS =delimitMate#BS()
 inoremap <silent> <Plug>CocRefresh =coc#_complete()
 inoremap <silent> <expr> <C-Space> coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\" : "\"
@@ -19,70 +17,71 @@ nmap <nowait>  <Plug>(VM-Find-Under)
 xmap <nowait>  <Plug>(VM-Find-Subword-Under)
 nnoremap ^[ ^[
 nnoremap  :noh
-nmap  ca <Plug>NERDCommenterAltDelims
-xmap  cu <Plug>NERDCommenterUncomment
-nmap  cu <Plug>NERDCommenterUncomment
-xmap  cb <Plug>NERDCommenterAlignBoth
-nmap  cb <Plug>NERDCommenterAlignBoth
-xmap  cl <Plug>NERDCommenterAlignLeft
-nmap  cl <Plug>NERDCommenterAlignLeft
-nmap  cA <Plug>NERDCommenterAppend
-xmap  cy <Plug>NERDCommenterYank
-nmap  cy <Plug>NERDCommenterYank
-xmap  cs <Plug>NERDCommenterSexy
-nmap  cs <Plug>NERDCommenterSexy
-xmap  ci <Plug>NERDCommenterInvert
-nmap  ci <Plug>NERDCommenterInvert
-nmap  c$ <Plug>NERDCommenterToEOL
-xmap  cn <Plug>NERDCommenterNested
-nmap  cn <Plug>NERDCommenterNested
-xmap  cm <Plug>NERDCommenterMinimal
-nmap  cm <Plug>NERDCommenterMinimal
-xmap  c  <Plug>NERDCommenterToggle
-nmap  c  <Plug>NERDCommenterToggle
-xmap  cc <Plug>NERDCommenterComment
-nmap  cc <Plug>NERDCommenterComment
-nnoremap <silent>  b :LeaderfBuffer
-nnoremap <silent>  ff :LeaderfFile
-noremap  fp :=printf("Leaderf gtags --previous %s", "")
-noremap  fn :=printf("Leaderf gtags --next %s", "")
-noremap  fo :=printf("Leaderf! gtags --recall %s", "")
-noremap  fd :=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))
-noremap  fr :=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))
-noremap  fl :=printf("Leaderf line %s", "")
-noremap  ft :=printf("Leaderf bufTag %s", "")
-noremap  fm :=printf("Leaderf mru %s", "")
-noremap  fb :=printf("Leaderf buffer %s", "")
+nnoremap <silent>  p :CocListResume
 nnoremap <silent>  k :CocPrev
 nnoremap <silent>  j :CocNext
 nnoremap <silent>  s :CocList -I symbols
 nnoremap <silent>  o :CocList outline
 nnoremap <silent>  c :CocList commands
 nnoremap <silent>  e :CocList extensions
-nmap  qf <Plug>(coc-fix-current)
-nmap  ac <Plug>(coc-codeaction)
 nnoremap <silent>  a :CocList diagnostics
-xmap  a <Plug>(coc-codeaction-selected)
-nmap  f <Plug>(coc-format-selected)
-xmap  f <Plug>(coc-format-selected)
-nmap  rn <Plug>(coc-rename)
-nmap <silent>  g <Plug>(coc-diagnostic-info)
-nmap  M %
-nnoremap  jw j
-nnoremap  kw k
-nnoremap  hw h
-nnoremap  lw l
-nmap  Q :qa!
-nmap  WQ :wa:q
-nmap  w :w
-nmap  q :q
-nnoremap <silent>  p :CocListResume
-vnoremap  y "+y
 omap <silent> % <Plug>(MatchitOperationForward)
 xmap <silent> % <Plug>(MatchitVisualForward)
 nmap <silent> % <Plug>(MatchitNormalForward)
 xnoremap & :&&
 nnoremap & :&&
+nmap ;ca <Plug>NERDCommenterAltDelims
+xmap ;cu <Plug>NERDCommenterUncomment
+nmap ;cu <Plug>NERDCommenterUncomment
+xmap ;cb <Plug>NERDCommenterAlignBoth
+nmap ;cb <Plug>NERDCommenterAlignBoth
+xmap ;cl <Plug>NERDCommenterAlignLeft
+nmap ;cl <Plug>NERDCommenterAlignLeft
+nmap ;cA <Plug>NERDCommenterAppend
+xmap ;cy <Plug>NERDCommenterYank
+nmap ;cy <Plug>NERDCommenterYank
+xmap ;cs <Plug>NERDCommenterSexy
+nmap ;cs <Plug>NERDCommenterSexy
+xmap ;ci <Plug>NERDCommenterInvert
+nmap ;ci <Plug>NERDCommenterInvert
+nmap ;c$ <Plug>NERDCommenterToEOL
+xmap ;cn <Plug>NERDCommenterNested
+nmap ;cn <Plug>NERDCommenterNested
+xmap ;cm <Plug>NERDCommenterMinimal
+nmap ;cm <Plug>NERDCommenterMinimal
+xmap ;c  <Plug>NERDCommenterToggle
+nmap ;c  <Plug>NERDCommenterToggle
+xmap ;cc <Plug>NERDCommenterComment
+nmap ;cc <Plug>NERDCommenterComment
+nnoremap <silent> ;b :LeaderfBuffer
+nnoremap <silent> ;ff :LeaderfFile
+noremap ;fp :=printf("Leaderf gtags --previous %s", "")
+noremap ;fn :=printf("Leaderf gtags --next %s", "")
+noremap ;fo :=printf("Leaderf! gtags --recall %s", "")
+noremap ;fd :=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))
+noremap ;fr :=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))
+noremap ;fl :=printf("Leaderf line %s", "")
+noremap ;ft :=printf("Leaderf bufTag %s", "")
+noremap ;fm :=printf("Leaderf mru %s", "")
+noremap ;fb :=printf("Leaderf buffer %s", "")
+nmap ;qf <Plug>(coc-fix-current)
+nmap ;ac <Plug>(coc-codeaction)
+nmap ;a <Plug>(coc-codeaction-selected)
+xmap ;a <Plug>(coc-codeaction-selected)
+nmap ;f <Plug>(coc-format-selected)
+xmap ;f <Plug>(coc-format-selected)
+nmap ;rn <Plug>(coc-rename)
+nmap ;M %
+nnoremap ;jw j
+nnoremap ;kw k
+nnoremap ;hw h
+nnoremap ;lw l
+nmap ;Q :qa!
+nmap ;WQ :wa:q
+nmap ;w :w
+nmap ;q :q
+nmap ;p "+p
+vnoremap ;y "+y
 nmap LE $
 nmap LB 0
 xmap S <Plug>VSurround
@@ -130,7 +129,7 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <SNR>98_: :=v:count ? v:count : ''
+nnoremap <SNR>91_: :=v:count ? v:count : ''
 nmap <nowait> <C-N> <Plug>(VM-Find-Under)
 xmap <nowait> <C-N> <Plug>(VM-Find-Subword-Under)
 nmap <nowait> <C-Up> <Plug>(VM-Add-Cursor-Up)
@@ -242,21 +241,21 @@ noremap <Plug>LeaderfRgCwordRegexNoBoundary :=leaderf#Rg#startCmdline(0, 0, 
 noremap <Plug>LeaderfRgCwordLiteralBoundary :=leaderf#Rg#startCmdline(0, 0, 0, 1)
 noremap <Plug>LeaderfRgCwordLiteralNoBoundary :=leaderf#Rg#startCmdline(0, 0, 0, 0)
 noremap <Plug>LeaderfRgPrompt :Leaderf rg -e 
-noremap <silent> <Plug>LeaderfMruCwdFullScreen :call leaderf#Mru#startExpl('fullScreen')
-noremap <silent> <Plug>LeaderfMruCwdRight :call leaderf#Mru#startExpl('right')
-noremap <silent> <Plug>LeaderfMruCwdLeft :call leaderf#Mru#startExpl('left')
-noremap <silent> <Plug>LeaderfMruCwdBottom :call leaderf#Mru#startExpl('bottom')
-noremap <silent> <Plug>LeaderfMruCwdTop :call leaderf#Mru#startExpl('top')
-noremap <silent> <Plug>LeaderfBufferFullScreen :call leaderf#Buffer#startExpl('fullScreen')
-noremap <silent> <Plug>LeaderfBufferRight :call leaderf#Buffer#startExpl('right')
-noremap <silent> <Plug>LeaderfBufferLeft :call leaderf#Buffer#startExpl('left')
-noremap <silent> <Plug>LeaderfBufferBottom :call leaderf#Buffer#startExpl('bottom')
-noremap <silent> <Plug>LeaderfBufferTop :call leaderf#Buffer#startExpl('top')
-noremap <silent> <Plug>LeaderfFileFullScreen :call leaderf#File#startExpl('fullScreen')
-noremap <silent> <Plug>LeaderfFileRight :call leaderf#File#startExpl('right')
-noremap <silent> <Plug>LeaderfFileLeft :call leaderf#File#startExpl('left')
-noremap <silent> <Plug>LeaderfFileBottom :call leaderf#File#startExpl('bottom')
-noremap <silent> <Plug>LeaderfFileTop :call leaderf#File#startExpl('top')
+noremap <silent> <Plug>LeaderfMruCwdFullScreen :Leaderf mru --fullScreen
+noremap <silent> <Plug>LeaderfMruCwdRight :Leaderf mru --right
+noremap <silent> <Plug>LeaderfMruCwdLeft :Leaderf mru --left
+noremap <silent> <Plug>LeaderfMruCwdBottom :Leaderf mru --bottom
+noremap <silent> <Plug>LeaderfMruCwdTop :Leaderf mru --top
+noremap <silent> <Plug>LeaderfBufferFullScreen :Leaderf buffer --fullScreen
+noremap <silent> <Plug>LeaderfBufferRight :Leaderf buffer --right
+noremap <silent> <Plug>LeaderfBufferLeft :Leaderf buffer --left
+noremap <silent> <Plug>LeaderfBufferBottom :Leaderf buffer --bottom
+noremap <silent> <Plug>LeaderfBufferTop :Leaderf buffer --top
+noremap <silent> <Plug>LeaderfFileFullScreen :Leaderf file --fullScreen
+noremap <silent> <Plug>LeaderfFileRight :Leaderf file --right
+noremap <silent> <Plug>LeaderfFileLeft :Leaderf file --left
+noremap <silent> <Plug>LeaderfFileBottom :Leaderf file --bottom
+noremap <silent> <Plug>LeaderfFileTop :Leaderf file --top
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
 noremap <C-F> :=printf("Leaderf! rg -e %s ", expand("<cword>"))
@@ -296,7 +295,7 @@ set cindent
 set cmdheight=2
 set expandtab
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set formatoptions=tln
+set formatoptions=tq
 set helplang=cn
 set hidden
 set hlsearch
@@ -307,7 +306,7 @@ set laststatus=2
 set mouse=a
 set pyxversion=3
 set ruler
-set runtimepath=~/.vim,~/.vim/pack/plugins/start/vim-visual-multi,~/.vim/pack/plugins/start/vim-fugitive,~/.vim/pack/plugins/start/vim-airline,~/.vim/pack/plugins/start/vim-abolish,~/.vim/pack/plugins/start/surround,~/.vim/pack/plugins/start/nerdtree,~/.vim/pack/plugins/start/nerdcommenter,~/.vim/pack/plugins/start/indentLine,~/.vim/pack/plugins/start/fcitx.vim,~/.vim/pack/plugins/start/delimitMate,~/.vim/pack/plugins/start/coc.nvim,~/.vim/pack/plugins/start/LeaderF,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vim82/pack/dist/opt/matchit,~/.vim/pack/plugins/start/indentLine/after,/usr/share/vim/vimfiles/after,~/.vim/after
+set runtimepath=~/.vim,~/.vim/pack/plugins/start/vim-visual-multi,~/.vim/pack/plugins/start/vim-fugitive,~/.vim/pack/plugins/start/vim-airline,~/.vim/pack/plugins/start/vim-abolish,~/.vim/pack/plugins/start/surround,~/.vim/pack/plugins/start/nerdtree,~/.vim/pack/plugins/start/nerdcommenter,~/.vim/pack/plugins/start/indentLine,~/.vim/pack/plugins/start/fcitx.vim,~/.vim/pack/plugins/start/coc.nvim,~/.vim/pack/plugins/start/auto-pairs,~/.vim/pack/plugins/start/LeaderF,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vim82/pack/dist/opt/matchit,~/.vim/pack/plugins/start/indentLine/after,/usr/share/vim/vimfiles/after,~/.vim/after
 set shell=/usr/bin/fish
 set shiftwidth=4
 set shortmess=filnxtToOSc
@@ -331,8 +330,6 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd .git/COMMIT_EDITMSG
-edit .git/COMMIT_EDITMSG
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -342,28 +339,7 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-let s:cpo_save=&cpo
-set cpo&vim
-imap <buffer> <silent> <C-G>g <Plug>delimitMateJumpMany
-imap <buffer> <S-BS> <Plug>delimitMateS-BS
-imap <buffer> <C-H> <Plug>delimitMateBS
-imap <buffer> <BS> <Plug>delimitMateBS
-cmap <buffer> <silent> <C-R><C-F> <Plug><cfile>
-cnoremap <buffer> <expr> <Plug><cfile> fugitive#MessageCfile()
-imap <buffer> <silent> g <Plug>delimitMateJumpMany
-imap <buffer>  <Plug>delimitMateBS
-cmap <buffer> <silent>  <Plug><cfile>
-imap <buffer> " <Plug>delimitMate"
-imap <buffer> ' <Plug>delimitMate'
-imap <buffer> ( <Plug>delimitMate(
-imap <buffer> ) <Plug>delimitMate)
-imap <buffer> [ <Plug>delimitMate[
-imap <buffer> ] <Plug>delimitMate]
-imap <buffer> ` <Plug>delimitMate`
-imap <buffer> { <Plug>delimitMate{
-imap <buffer> } <Plug>delimitMate}
-let &cpo=s:cpo_save
-unlet s:cpo_save
+enew
 setlocal keymap=
 setlocal noarabic
 setlocal noautoindent
@@ -380,8 +356,8 @@ setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=:#
-setlocal commentstring=#\ %s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=inc
 setlocal conceallevel=2
@@ -398,8 +374,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'gitcommit'
-setlocal filetype=gitcommit
+if &filetype != ''
+setlocal filetype=
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -413,22 +389,21 @@ set foldmethod=syntax
 setlocal foldmethod=syntax
 setlocal foldminlines=1
 setlocal foldnestmax=20
-set foldtext=fugitive#Foldtext()
-setlocal foldtext=fugitive#Foldtext()
+setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tln
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*\\|^\\s*[-*+]\\s\\+
+setlocal formatoptions=tq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
-setlocal includeexpr=substitute(v:fname,'^[^/]\\+/','','')
+setlocal includeexpr=
 setlocal indentexpr=
 setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=git\ --git-dir='/home/nocetfy/.git'\ show
+setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -436,14 +411,14 @@ setlocal nolist
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
+setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
-setlocal path=~/.git,~/,
+setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -469,17 +444,17 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'gitcommit'
-setlocal syntax=gitcommit
+if &syntax != ''
+setlocal syntax=
 endif
-setlocal tabstop=8
+setlocal tabstop=4
 setlocal tagcase=
 setlocal tagfunc=
 setlocal tags=
 setlocal termwinkey=
 setlocal termwinscroll=10000
 setlocal termwinsize=
-setlocal textwidth=72
+setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
@@ -490,14 +465,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 10) / 20)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
 tabnext 1
-badd +0 .git/COMMIT_EDITMSG
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
