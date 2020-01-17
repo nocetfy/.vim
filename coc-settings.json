@@ -33,6 +33,14 @@
             ]
         }
     },
+    "coc.preferences.formatOnSaveFiletypes": [
+        "python",
+        "java",
+        "go",
+        "rs",
+        "sh"
+    ],
+    "python.formatting.provider": "black",
     "suggest.noselect": false,
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false
